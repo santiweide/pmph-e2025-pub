@@ -35,6 +35,6 @@ let main [n] (a : [n]f32) : (bool, f32, f32, f32) =
 ------------------------------------
 -- Useful Futhark commands:
 --
--- futhark opencl simpleLH.fut
--- futhark bench --backend=opencl simpleLH.fut
+-- futhark opencl simple-lh.fut
+-- futhark bench --backend=opencl simple-lh.fut
 -- futhark dataset --f32-bounds=-10.0:10.0 -b -g [64000000]f32 > data.in

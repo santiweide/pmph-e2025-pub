@@ -96,7 +96,13 @@ Your task is to fill in the dots in the implementation of the LSS problem. Pleas
 
 ** add one or more small datasets---reference input and output directly in the main files `lssp-same.fut`, `lssp-zeros.fut`, `lssp-sorted.fut`---for each predicate (zeros, sorted, same) and make sure that your program validates on all three predicates by running `futhark test --backend=cuda lssp-sorted.fut` and so on.
 
+Question: 
+* how to add dataset to futhark?
+
 ** add a couple of larger datasets and automatically benchmark the sequential and parallel version of the code, e.g., by using `futhark bench --backend=c ...` and `futhark bench --backend=cuda ...`, respectively. (Improved sequential runtime `--backend=c` can be achieved when using the function `lssp_seq` instead of `lssp`, but it is not mandatory.)  Report the runtimes and the speedup achieved by GPU acceleration.  Several ways of integrating datasets directly in the Futhark program are demonstrated in github file `HelperCode/Lect-1-LH/mssp.fut`
+
+Question:
+* how to add larger datasets? when we use futhark bench the large datasets are automatically loaded...?
 
 ** submit your code `lssp.fut` (together with all the other provided code, so that your TAs do not have to move files around).
 
