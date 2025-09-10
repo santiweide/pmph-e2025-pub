@@ -56,7 +56,7 @@ Here we use the work-depth model to analysis the performance expectation.
 Work `W(n)` is the total number of primitive operations performed by the algorithm on an input of size `n`, summing across all parallel branches.
 
 #### Work analysis
-The `primes-seq`, `primes-native` and `primes-flat` all have a work of $W(n) \;=\; \Theta \big(n \log\ log n\big).$ They directly construct the indices to be eliminated (the sequence of multiples for each base p), set these positions to zero at once; avoid performing division tests on each number individually.
+The `primes-seq`, `primes-native` and `primes-flat` all have a work of $W(n)  =  \Theta \big(n \log\ log n\big).$ They directly construct the indices to be eliminated (the sequence of multiples for each base p), set these positions to zero at once; avoid performing division tests on each number individually.
 
 Calculation: 
 
@@ -64,7 +64,7 @@ Work per iteration:
   
   $\sum_{p\in \text{primes} \le \texttt{len}}
   \left(\left\lfloor \frac{\texttt{len}}{p}\right\rfloor - 1\right)
-  \;=\; \Theta  \big(\texttt{len} \log\log \texttt{len}\big),$
+   =  \Theta  \big(\texttt{len} \log\log \texttt{len}\big),$
 
 The number of iterations: $\lceil \log_{2}\log_{2} n \rceil$
 
@@ -77,7 +77,7 @@ Since the Depth treats map/scan/filter/scatter as constant-span primitives, we h
 
 The depth of `prime-naive` is $\Theta  \big(\sqrt n\big)$, because its outer loop goes from 2 to $\sqrt n$, and inside the loop is `map/scatter` which contributes as constant.
 
-The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) \;=\; \Theta  \big(n \log\log n\big).$
+The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n)  =  \Theta  \big(n \log\log n\big).$
 
 Also my experiment result is as follows:
 
