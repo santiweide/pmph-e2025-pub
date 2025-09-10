@@ -36,7 +36,24 @@ let primesFlat (n: i64) : []i64 =
       -- Also note that `not_primes` has flat length equal to `flat_size`
       --  and the shape of `composite` is `mult_lens`. 
       
-      let not_primes = replicate flat_size 0
+      -- seg_ends = inclusive scan of lengths; seg_starts = exclusive starts
+      let seg_ends    = scan (+) 0 mult_lens
+      let seg_starts  = map2 (-) seg_ends mult_lens  -- [S]i64, S = number of segments
+
+      -- Build "heads" with the same [S] dimension for indices and values.
+      let ones        = map (const 1i64) seg_starts  -- [S]i64, same size var as seg_starts
+      let heads       = scatter (replicate flat_size 0i64) seg_starts ones
+
+      let seg_ids_inc = scan (+) 0 heads
+      let seg_ids     = map (\x -> x - 1i64) seg_ids_inc
+
+      let p_flat      = map (\sid -> sq_primes[sid]) seg_ids
+      let start_flat  = map (\sid -> seg_starts[sid]) seg_ids
+      let idx_flat    = iota flat_size
+      let j_vals      = map (+2i64) (map2 (-) idx_flat start_flat)
+
+      let not_primes  = map2 (*) p_flat j_vals
+
 
       -- If not_primes is correctly computed, then the remaining
       -- code is correct and will do the job of computing the prime
