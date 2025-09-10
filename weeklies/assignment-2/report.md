@@ -56,7 +56,7 @@ Here we use the work-depth model to analysis the performance expectation.
 Work `W(n)` is the total number of primitive operations performed by the algorithm on an input of size `n`, summing across all parallel branches.
 
 #### Work analysis
-The `primes-seq`, `primes-native` and `primes-flat` all have a work of $W(n) \;=\; \Theta\!\big(n \log\log n\big).$ They directly construct the indices to be eliminated (the sequence of multiples for each base p), set these positions to zero at once; avoid performing division tests on each number individually.
+The `primes-seq`, `primes-native` and `primes-flat` all have a work of $W(n) \;=\; \Theta \big(n \log\ log n\big).$ They directly construct the indices to be eliminated (the sequence of multiples for each base p), set these positions to zero at once; avoid performing division tests on each number individually.
 
 Calculation: 
 
@@ -64,20 +64,20 @@ Work per iteration:
   
   $\sum_{p\in \text{primes} \le \texttt{len}}
   \left(\left\lfloor \frac{\texttt{len}}{p}\right\rfloor - 1\right)
-  \;=\; \Theta\!\big(\texttt{len} \log\log \texttt{len}\big),$
+  \;=\; \Theta  \big(\texttt{len} \log\log \texttt{len}\big),$
 
 The number of iterations: $\lceil \log_{2}\log_{2} n \rceil$
 
-Total work: $W(n) = \Theta\!\big(n \log\log n\big).$
+Total work: $W(n) = \Theta  \big(n \log\log n\big).$
 
 The ad-hoc version does not meet my expectation. For each candidate i in the interval, this version tests divide it by all primes p in the "known prime table acc." Only retain i if none of these primes divide it evenly. So for the $k_th$ iteration, $W_k=|is_k|*|acc_k|$. And the total workload is larger than the direct filtering strategy.
 
 #### Depth analysis
-Since the Depth treats map/scan/filter/scatter as constant-span primitives, we have depth of `prime-flat` and `prime-adhoc` as $\Theta\!\big(\log\log n\big)$.
+Since the Depth treats map/scan/filter/scatter as constant-span primitives, we have depth of `prime-flat` and `prime-adhoc` as $\Theta  \big(\log\log n\big)$.
 
-The depth of `prime-naive` is $\Theta\!\big(\sqrt n\big)$, because its outer loop goes from 2 to $\sqrt n$, and inside the loop is `map/scatter` which contributes as constant.
+The depth of `prime-naive` is $\Theta  \big(\sqrt n\big)$, because its outer loop goes from 2 to $\sqrt n$, and inside the loop is `map/scatter` which contributes as constant.
 
-The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) \;=\; \Theta\!\big(n \log\log n\big).$
+The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) \;=\; \Theta  \big(n \log\log n\big).$
 
 Also my experiment result is as follows:
 
