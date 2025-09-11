@@ -96,15 +96,19 @@ The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) 
 
 2) In the new code, for a continuous section of threadIdx.x, the accessed `loc_ind` is also continuous, and so memory controller can coalesce the memory access into full-width transactions. The previous layout made neighboring threads stride by CHUNK, which is not able to be coalesced.
 
-3) According to the experiment `Coalesced ON & Warp OFF ` vs `Coalesced OFF & Warp OFF`, the following tests have an improvement of bandwidthw
+3) According to the experiment `Coalesced ON & Warp OFF ` vs `Coalesced OFF & Warp OFF`, the following tests have an improvement of bandwidth:
 
-| Test Case                                | After Task2&3 GPU (GB/s) | Baseline GPU (GB/s) | Relative Gain (%) |
+| Test Case                                | GMem-SMem Coalesced (GB/s) | Baseline (GB/s) | Relative Gain (%) |
 |------------------------------------------|---------------------------|----------------------|-------------------|
-| Optimized Reduce – MSSP                  | 370.04                   | 168.07              | +120.1%           |
-| Scan Inclusive AddI32                    | 769.26                   | 411.11              | +87.1%            |
-| Segmented Scan Inclusive AddI32          | 1012.33                  | 555.39             | +82.23%             |
+| Optimized Reduce – MSSP                  | 256.91                   | 200.61              | +28.0%           |
+| Scan Inclusive AddI32                    | 673.80                   | 268.11              | +151.31%            |
+| Segmented Scan Inclusive AddI32          | 1030.96                  | 457.68             | +125.26%             |
 
-## Task3 
+The MSSP is not communitative, and AddInt32 is communicative. So when do the optimized map reduce they are of different implementations.
+
+## Task3 Implement Inclusive Scan at WARP Level
+
+1) Implementation: we do a warp level reduce add, because all the threads in a wrap are naturally synchronized. 
 
 ```c++
 template<class OP>
@@ -116,12 +120,33 @@ scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
     ptr[idx] = v;
     for (int offset = 1; offset < WARP; offset <<= 1) {
         if (lane >= offset) {
-            volatile T& a = ptr[idx - offset];
-            volatile T& b = ptr[idx];
-            v = OP::apply(a, b);
+            v = OP::apply(ptr[idx - offset], ptr[idx]);
             ptr[idx] = v;
         }
     }
     return v;
 }
 ```
+
+2) Performance impact
+
+The program is memory bound, so we keep task2's implementation as baseline. Here we can see `Optimized Reduce – MSSP ` and `Scan Inclusive AddI32` are influenced. Although `Optimized Reduce – Int32 Add` also calls `scanIncWarp`, it is still memory bound.
+
+| Test Case                                | Warp-level reduce+GMem-SMem Coalesced (GB/s) | GMem-SMem Coalesced (GB/s) | Relative Gain (%) |
+|------------------------------------------|-----------------------------------------------|-----------------------------|-------------------|
+| Optimized Reduce – MSSP                  | 375.60                                        | 256.91                      | +46.2%            |
+| Scan Inclusive AddI32                    | 739.85                                        | 673.80                      | +9.8%             |
+
+
+Also, we have a version with task2+task3 with original baseline.
+
+| Test Case                                | Warp-level reduce+GMem-SMem Coalesced (GB/s) | baseline (GB/s) | Relative Gain (%) |
+|------------------------------------------|-----------------------------------------------|-----------------------------|-------------------|
+| Optimized Reduce – MSSP                  | 375.60                                        | 200.61                      | +87.2%            |
+| Scan Inclusive AddI32                    | 739.85                                        | 268.11                      | +175.95%             |
+
+
+## Task4 
+
+
+## Task5 
