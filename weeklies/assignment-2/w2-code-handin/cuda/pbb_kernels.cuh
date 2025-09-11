@@ -186,16 +186,14 @@ scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
     T v = OP::remVolatile(ptr[idx]); 
     ptr[idx] = v;
 
-    if (lane >= 1)  { volatile T& a = ptr[idx - 1];  volatile T& b = ptr[idx];
-                      v = OP::apply(a, b); ptr[idx] = v; }
-    if (lane >= 2)  { volatile T& a = ptr[idx - 2];  volatile T& b = ptr[idx];
-                      v = OP::apply(a, b); ptr[idx] = v; }
-    if (lane >= 4)  { volatile T& a = ptr[idx - 4];  volatile T& b = ptr[idx];
-                      v = OP::apply(a, b); ptr[idx] = v; }
-    if (lane >= 8)  { volatile T& a = ptr[idx - 8];  volatile T& b = ptr[idx];
-                      v = OP::apply(a, b); ptr[idx] = v; }
-    if (lane >= 16) { volatile T& a = ptr[idx - 16]; volatile T& b = ptr[idx];
-                      v = OP::apply(a, b); ptr[idx] = v; }
+    for (int offset = 1; offset < WARP; offset <<= 1) {
+        if (lane >= offset) {
+            volatile T& a = ptr[idx - offset];
+            volatile T& b = ptr[idx];
+            v = OP::apply(a, b);
+            ptr[idx] = v;
+        }
+    }
 
     return v;
 }
