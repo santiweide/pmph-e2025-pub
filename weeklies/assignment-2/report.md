@@ -102,4 +102,26 @@ The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) 
 |------------------------------------------|---------------------------|----------------------|-------------------|
 | Optimized Reduce – MSSP                  | 370.04                   | 168.07              | +120.1%           |
 | Scan Inclusive AddI32                    | 769.26                   | 411.11              | +87.1%            |
-| Segmented Scan Inclusive AddI32          | 1012.33                  | 1109.39             | −8.7%             |
+| Segmented Scan Inclusive AddI32          | 1012.33                  | 555.39             | +82.23%             |
+
+## Task3 
+
+```c++
+template<class OP>
+__device__ inline typename OP::RedElTp
+scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
+    const uint32_t lane = idx & (WARP-1);
+    using T = typename OP::RedElTp;
+    T v = OP::remVolatile(ptr[idx]); 
+    ptr[idx] = v;
+    for (int offset = 1; offset < WARP; offset <<= 1) {
+        if (lane >= offset) {
+            volatile T& a = ptr[idx - offset];
+            volatile T& b = ptr[idx];
+            v = OP::apply(a, b);
+            ptr[idx] = v;
+        }
+    }
+    return v;
+}
+```

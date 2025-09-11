@@ -182,10 +182,8 @@ __device__ inline typename OP::RedElTp
 scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
     const uint32_t lane = idx & (WARP-1);
     using T = typename OP::RedElTp;
-
     T v = OP::remVolatile(ptr[idx]); 
     ptr[idx] = v;
-
     for (int offset = 1; offset < WARP; offset <<= 1) {
         if (lane >= offset) {
             volatile T& a = ptr[idx - offset];
@@ -194,7 +192,6 @@ scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
             ptr[idx] = v;
         }
     }
-
     return v;
 }
 #else 
