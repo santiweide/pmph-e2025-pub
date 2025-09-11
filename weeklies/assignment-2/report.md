@@ -97,11 +97,15 @@ The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) 
 
 3) According to the experiment `Coalesced ON & Warp OFF ` vs `Coalesced OFF & Warp OFF`:
 
-Optimized Reduce – Int32 Add: ~1.02×
+* Optimized Reduce – Int32 Add: ~Almost the same
 
-Optimized Reduce – MSSP: ~2.20×
+* Optimized Reduce – MSSP: ~20% increase
 
-Scan Inclusive – AddI32: ~1.85×
+* Scan Inclusive – AddI32: ~20% increase
+
+* Segmented Scan Inclusive – AddI32: ~Almost the same
+
+The specific data is listed in the Table:
 
 | Test                                | Coalesced OFF & Warp OFF | Coalesced ON & Warp OFF | Coalesced OFF & Warp ON | Coalesced ON & Warp ON |
 | ----------------------------------- | ------------------------ | ----------------------- | ----------------------- | ---------------------- |
@@ -109,3 +113,36 @@ Scan Inclusive – AddI32: ~1.85×
 | Optimized Reduce – **MSSP**         | 168.14 GB/s              | 205.77 GB/s             | 205.77 GB/s             | **370.04 GB/s**        |
 | Scan Inclusive **AddI32**           | 400.55 GB/s              | 480.59 GB/s             | 455.94 GB/s             | **739.40 GB/s**        |
 | Segmented Scan Inclusive **AddI32** | 1112.03 GB/s             | 1110.27 GB/s            | 1110.27 GB/s            | 1030.21 GB/s           |
+
+
+The calling logic is as follows:
+```mermaid
+graph TD
+    A[testGenRed in pbb_main.cu] --> B{OP::commutative?};
+    B -- Yes --> C[redCommuKernel];
+    B -- No --> D[redAssocKernel];
+    D --> E[copyFromGlb2ShrMem];
+    D --> F[scanIncBlock];
+    F --> G[scanIncWarp];
+    A --> H[redAssoc1Block];
+    H --> I[scanIncBlock];
+    I --> J[scanIncWarp];
+
+    subgraph "Host Code (CPU)"
+        A
+    end
+
+    subgraph "Device Code (GPU Kernels)"
+        C
+        D
+        H
+    end
+
+    subgraph "Device Helper Functions"
+        E
+        F
+        G
+        I
+        J
+    end
+```
