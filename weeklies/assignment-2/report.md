@@ -13,7 +13,7 @@ The implementation passed on both dataset with `futhark test --backend=cuda prim
 
 Large dataset (N = 1e7): After generating ref10000000.out with primes-seq.fut as instructed, futhark test will also validate the flat version against that reference (the file already contains the validation stanza).
 
-#### 1.2 code
+#### 1.2 Code Explanation
 
 In each iteration with bound len, for every prime `p` in `sqrn_primes` I can form an inner list: `L_p = [2p, 3p, ..., floor(len/p)p]`. Then I concatenate all `L_p` to a single vector not_primes, and scatter zeros at those indices into an all-ones flag vector of length `len+1`. Finally, I filter the indices that remain true to obtain the new `sqrn_primes` for the next (squared) len.
 
@@ -52,10 +52,10 @@ I have `mult_lens` are exactly the lengths of the irregular inner lists `arr = [
 ```
 
 ### 1.3 Performance on large dataset(1e7)
-Here we use the work-depth model to analysis the performance expectation.
+Here I use the work-depth model to analysis the performance expectation.
 Work `W(n)` is the total number of primitive operations performed by the algorithm on an input of size `n`, summing across all parallel branches.
 
-#### Work analysis
+#### 1.3.1 Work analysis
 The `primes-seq`, `primes-native` and `primes-flat` all have a work of $W(n)  =  \Theta \big(n \log\ log n\big).$ They directly construct the indices to be eliminated (the sequence of multiples for each base p), set these positions to zero at once; avoid performing division tests on each number individually.
 
 Calculation: 
@@ -72,18 +72,40 @@ Total work: $W(n) = \Theta  \big(n \log\log n\big).$
 
 The ad-hoc version does not meet my expectation. For each candidate i in the interval, this version tests divide it by all primes p in the "known prime table acc." Only retain i if none of these primes divide it evenly. So for the $k_th$ iteration, $W_k=|is_k|*|acc_k|$. And the total workload is larger than the direct filtering strategy.
 
-#### Depth analysis
-Since the Depth treats map/scan/filter/scatter as constant-span primitives, we have depth of `prime-flat` and `prime-adhoc` as $\Theta  \big(\log\log n\big)$.
+#### 1.3.2 Depth analysis
+Since the Depth treats map/scan/filter/scatter as constant-span primitives, I have depth of `prime-flat` and `prime-adhoc` as $\Theta  \big(\log\log n\big)$.
 
 The depth of `prime-naive` is $\Theta  \big(\sqrt n\big)$, because its outer loop goes from 2 to $\sqrt n$, and inside the loop is `map/scatter` which contributes as constant.
 
 The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n)  =  \Theta  \big(n \log\log n\big).$
 
-Also my experiment result is as follows:
+#### 1.3.3 Experiment Result
 
 | Implementation   | Backend | Avg time (ms) | Performance      |
 | ---------------- | ------- | ------------- | -------------------------------------------------------------------- |
-| primes-seq.fut   | C       | 183.570       | Slowest (no parallelism).        |
+| primes-seq.fut   | C       | 183.570       | SloI st (no parallelism).        |
 | primes-adhoc.fut | CUDA    | 183.319       | Optimal depth but more total work; can win on GPU due to regularity. |
 | primes-naive.fut | CUDA    | 58.012        | Faster than seq            |
 | primes-flat.fut  | CUDA    | 1.554.        | Fastest    |
+
+
+## Task2 Copying from/to Global to/from Shared Memory in Coalesced Fashion
+1) one-line replacement:
+ I change from `uint32_t loc_ind = threadIdx.x * CHUNK + i;` to `uint32_t loc_ind = i * blockDim.x + threadIdx.x;`, so that i is accessed with Row-major and can coalesced across threads
+
+2) In the new code, for a continuous section of threadIdx.x, the accessed `loc_ind` is also continuous, and so memory controller can coalesce the memory access into full-width transactions. The previous layout made neighboring threads stride by CHUNK, which is not able to be coalesced.
+
+3) According to the experiment `Coalesced ON & Warp OFF ` vs `Coalesced OFF & Warp OFF`:
+
+Optimized Reduce – Int32 Add: ~1.02×
+
+Optimized Reduce – MSSP: ~2.20×
+
+Scan Inclusive – AddI32: ~1.85×
+
+| Test                                | Coalesced OFF & Warp OFF | Coalesced ON & Warp OFF | Coalesced OFF & Warp ON | Coalesced ON & Warp ON |
+| ----------------------------------- | ------------------------ | ----------------------- | ----------------------- | ---------------------- |
+| Optimized Reduce – **Int32 Add**    | 995.06 GB/s              | 970.91 GB/s             | 1030.96 GB/s            | **1015.26 GB/s**       |
+| Optimized Reduce – **MSSP**         | 168.14 GB/s              | 205.77 GB/s             | 205.77 GB/s             | **370.04 GB/s**        |
+| Scan Inclusive **AddI32**           | 400.55 GB/s              | 480.59 GB/s             | 455.94 GB/s             | **739.40 GB/s**        |
+| Segmented Scan Inclusive **AddI32** | 1112.03 GB/s             | 1110.27 GB/s            | 1110.27 GB/s            | 1030.21 GB/s           |

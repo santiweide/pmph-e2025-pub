@@ -176,6 +176,30 @@ class Mssp {
  *     all threads will reach the barrier, resulting in incorrect
  *     results.)
  */
+#if 1
+template<class OP>
+__device__ inline typename OP::RedElTp
+scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
+    const uint32_t lane = idx & (WARP-1);
+    using T = typename OP::RedElTp;
+
+    T v = OP::remVolatile(ptr[idx]); 
+    ptr[idx] = v;
+
+    if (lane >= 1)  { volatile T& a = ptr[idx - 1];  volatile T& b = ptr[idx];
+                      v = OP::apply(a, b); ptr[idx] = v; }
+    if (lane >= 2)  { volatile T& a = ptr[idx - 2];  volatile T& b = ptr[idx];
+                      v = OP::apply(a, b); ptr[idx] = v; }
+    if (lane >= 4)  { volatile T& a = ptr[idx - 4];  volatile T& b = ptr[idx];
+                      v = OP::apply(a, b); ptr[idx] = v; }
+    if (lane >= 8)  { volatile T& a = ptr[idx - 8];  volatile T& b = ptr[idx];
+                      v = OP::apply(a, b); ptr[idx] = v; }
+    if (lane >= 16) { volatile T& a = ptr[idx - 16]; volatile T& b = ptr[idx];
+                      v = OP::apply(a, b); ptr[idx] = v; }
+
+    return v;
+}
+#else 
 template<class OP>
 __device__ inline typename OP::RedElTp
 scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
@@ -189,6 +213,7 @@ scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
     }
     return OP::remVolatile(ptr[idx]);
 }
+#endif
 
 /**
  * A CUDA-block of threads cooperatively scan with generic-binop `OP`
@@ -426,6 +451,26 @@ redCommuKernel( typename OP::RedElTp* d_tmp
  *    new formula for computing `loc_ind`, two consecutive threads
  *    will access consecutive memory words in the same SIMD instruction.
  */
+ #if 1
+template<class T, uint32_t CHUNK>
+__device__ inline void
+copyFromGlb2ShrMem( const uint32_t glb_offs
+                  , const uint32_t N
+                  , const T& ne
+                  , T* d_inp
+                  , volatile T* shmem_inp
+) {
+    #pragma unroll
+    for(uint32_t i=0; i<CHUNK; i++) {
+        uint32_t loc_ind = i * blockDim.x + threadIdx.x;
+        uint32_t glb_ind = glb_offs + loc_ind;
+        T elm = ne;
+        if(glb_ind < N) { elm = d_inp[glb_ind]; }
+        shmem_inp[loc_ind] = elm;
+    }
+    __syncthreads(); // leave this here at the end!
+}
+ #else
 template<class T, uint32_t CHUNK>
 __device__ inline void
 copyFromGlb2ShrMem( const uint32_t glb_offs
@@ -444,6 +489,7 @@ copyFromGlb2ShrMem( const uint32_t glb_offs
     }
     __syncthreads(); // leave this here at the end!
 }
+#endif
 
 /**
  * This is very similar with `copyFromGlb2ShrMem` except
@@ -466,7 +512,8 @@ copyFromShr2GlbMem( const uint32_t glb_offs
 ) {
     #pragma unroll
     for (uint32_t i = 0; i < CHUNK; i++) {
-        uint32_t loc_ind = threadIdx.x * CHUNK + i;
+        // uint32_t loc_ind = threadIdx.x * CHUNK + i;
+        uint32_t loc_ind = i * blockDim.x + threadIdx.x;
         uint32_t glb_ind = glb_offs + loc_ind;
         if (glb_ind < N) {
             T elm = const_cast<const T&>(shmem_red[loc_ind]);
