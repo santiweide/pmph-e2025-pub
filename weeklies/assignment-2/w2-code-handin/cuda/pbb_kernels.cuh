@@ -176,7 +176,7 @@ class Mssp {
  *     all threads will reach the barrier, resulting in incorrect
  *     results.)
  */
-#if 1
+#if 0
 template<class OP>
 __device__ inline typename OP::RedElTp
 scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
@@ -451,7 +451,7 @@ redCommuKernel( typename OP::RedElTp* d_tmp
  *    new formula for computing `loc_ind`, two consecutive threads
  *    will access consecutive memory words in the same SIMD instruction.
  */
- #if 1
+ #if 0
 template<class T, uint32_t CHUNK>
 __device__ inline void
 copyFromGlb2ShrMem( const uint32_t glb_offs

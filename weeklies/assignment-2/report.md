@@ -2,6 +2,7 @@
 
 by Wanjing Hu(fng685)
 
+Running Env: hendrixfut01fl(A100-40G)
 
 ### Task1 Flat Implementation of Prime-Numbers Computation in Futhark
 
@@ -95,54 +96,10 @@ The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) 
 
 2) In the new code, for a continuous section of threadIdx.x, the accessed `loc_ind` is also continuous, and so memory controller can coalesce the memory access into full-width transactions. The previous layout made neighboring threads stride by CHUNK, which is not able to be coalesced.
 
-3) According to the experiment `Coalesced ON & Warp OFF ` vs `Coalesced OFF & Warp OFF`:
+3) According to the experiment `Coalesced ON & Warp OFF ` vs `Coalesced OFF & Warp OFF`, the following tests have an improvement of bandwidthw
 
-* Optimized Reduce – Int32 Add: ~Almost the same
-
-* Optimized Reduce – MSSP: ~20% increase
-
-* Scan Inclusive – AddI32: ~20% increase
-
-* Segmented Scan Inclusive – AddI32: ~Almost the same
-
-The specific data is listed in the Table:
-
-| Test                                | Coalesced OFF & Warp OFF | Coalesced ON & Warp OFF | Coalesced OFF & Warp ON | Coalesced ON & Warp ON |
-| ----------------------------------- | ------------------------ | ----------------------- | ----------------------- | ---------------------- |
-| Optimized Reduce – **Int32 Add**    | 995.06 GB/s              | 970.91 GB/s             | 1030.96 GB/s            | **1015.26 GB/s**       |
-| Optimized Reduce – **MSSP**         | 168.14 GB/s              | 205.77 GB/s             | 205.77 GB/s             | **370.04 GB/s**        |
-| Scan Inclusive **AddI32**           | 400.55 GB/s              | 480.59 GB/s             | 455.94 GB/s             | **739.40 GB/s**        |
-| Segmented Scan Inclusive **AddI32** | 1112.03 GB/s             | 1110.27 GB/s            | 1110.27 GB/s            | 1030.21 GB/s           |
-
-
-The calling logic is as follows:
-```mermaid
-graph TD
-    A[testGenRed in pbb_main.cu] --> B{OP::commutative?};
-    B -- Yes --> C[redCommuKernel];
-    B -- No --> D[redAssocKernel];
-    D --> E[copyFromGlb2ShrMem];
-    D --> F[scanIncBlock];
-    F --> G[scanIncWarp];
-    A --> H[redAssoc1Block];
-    H --> I[scanIncBlock];
-    I --> J[scanIncWarp];
-
-    subgraph "Host Code (CPU)"
-        A
-    end
-
-    subgraph "Device Code (GPU Kernels)"
-        C
-        D
-        H
-    end
-
-    subgraph "Device Helper Functions"
-        E
-        F
-        G
-        I
-        J
-    end
-```
+| Test Case                                | After Task2&3 GPU (GB/s) | Baseline GPU (GB/s) | Relative Gain (%) |
+|------------------------------------------|---------------------------|----------------------|-------------------|
+| Optimized Reduce – MSSP                  | 370.04                   | 168.07              | +120.1%           |
+| Scan Inclusive AddI32                    | 769.26                   | 411.11              | +87.1%            |
+| Segmented Scan Inclusive AddI32          | 1012.33                  | 1109.39             | −8.7%             |
