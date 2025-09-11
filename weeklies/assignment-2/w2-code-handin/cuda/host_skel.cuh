@@ -155,7 +155,8 @@ void mapReduce( const uint32_t     B        // desired CUDA block size ( <= 1024
         // from there.
         uint32_t       num_seq_chunks;
         num_blocks = getNumBlocks<CHUNK>(N, B, &num_seq_chunks);
-        const size_t shmem_size = B * max( sizeof(typename OP::InpElTp) * CHUNK
+        // in case of shmem_size over use...
+        size_t shmem_size = B * max( sizeof(typename OP::InpElTp) * CHUNK
                                          , sizeof(typename OP::RedElTp) );
         redAssocKernel<OP, CHUNK><<< num_blocks, B, shmem_size >>>(d_out, d_in, N, num_seq_chunks);
     }

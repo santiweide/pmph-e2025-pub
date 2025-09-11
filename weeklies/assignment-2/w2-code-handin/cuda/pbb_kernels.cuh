@@ -176,7 +176,7 @@ class Mssp {
  *     all threads will reach the barrier, resulting in incorrect
  *     results.)
  */
-#if 1
+#if 0
 template<class OP>
 __device__ inline typename OP::RedElTp
 scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
@@ -237,7 +237,6 @@ scanIncBlock(volatile typename OP::RedElTp* ptr, const uint32_t idx) {
     //   max block size = 32^2 = 1024
     // if (lane == (WARP-1)) { ptr[warpid] = OP::remVolatile(ptr[idx]); }
     if (lane == (WARP-1)) { ptr[warpid] = res; }
-
     __syncthreads();
 
     // 3. scan again the first warp.
@@ -249,7 +248,6 @@ scanIncBlock(volatile typename OP::RedElTp* ptr, const uint32_t idx) {
     if (warpid > 0) {
         res = OP::apply(ptr[warpid-1], res);
     }
-
 
     return res;
 }
@@ -447,7 +445,7 @@ redCommuKernel( typename OP::RedElTp* d_tmp
  *    new formula for computing `loc_ind`, two consecutive threads
  *    will access consecutive memory words in the same SIMD instruction.
  */
- #if 1
+ #if 0
 template<class T, uint32_t CHUNK>
 __device__ inline void
 copyFromGlb2ShrMem( const uint32_t glb_offs
@@ -499,7 +497,7 @@ copyFromGlb2ShrMem( const uint32_t glb_offs
  * `shmem_red` is the shared-memory of size
  *    `blockDim.x*CHUNK*sizeof(T)`
  */
-#if 1
+#if 0
 template<class T, uint32_t CHUNK>
 __device__ inline void
 copyFromShr2GlbMem( const uint32_t glb_offs

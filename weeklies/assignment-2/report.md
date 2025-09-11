@@ -2,7 +2,12 @@
 
 by Wanjing Hu(fng685)
 
-Running Env: hendrixfut01fl(A100-40G)
+Device name: NVIDIA A100-PCIE-40GB
+Number of hardware threads: 221184
+Max block size: 1024
+Shared memory size: 49152
+RUNS_GPU: 500
+ELEMS_PER_THREAD: 24(except task 4).
 
 ### Task1 Flat Implementation of Prime-Numbers Computation in Futhark
 
@@ -82,6 +87,11 @@ The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) 
 
 #### 1.3.3 Experiment Result
 
+Testing parallel basic blocks
+N = 100003565
+block size = 256
+ELEMS_PER_THREAD = 24
+
 | Implementation   | Backend | Avg time (ms) | Performance      |
 | ---------------- | ------- | ------------- | -------------------------------------------------------------------- |
 | primes-seq.fut   | C       | 183.570       | SloI st (no parallelism).        |
@@ -100,9 +110,9 @@ The depth of `prime-seq` is fully sequencial so depth equals to the work: $D(n) 
 
 | Test Case                                | GMem-SMem Coalesced (GB/s) | Baseline (GB/s) | Relative Gain (%) |
 |------------------------------------------|---------------------------|----------------------|-------------------|
-| Optimized Reduce – MSSP                  | 256.91                   | 200.61              | +28.0%           |
-| Scan Inclusive AddI32                    | 673.80                   | 268.11              | +151.31%            |
-| Segmented Scan Inclusive AddI32          | 1030.96                  | 457.68             | +125.26%             |
+| Optimized Reduce – MSSP                  | 373.85                   | 268.47              | +39.25%           |
+| Scan Inclusive AddI32                    | 925.96                   | 329.68              | +180.86%            |
+| Segmented Scan Inclusive AddI32          | 1038.61                  | 461.15             | +125.22%             |
 
 The MSSP is not communitative, and AddInt32 is communicative. So when do the optimized map reduce they are of different implementations.
 
@@ -129,23 +139,38 @@ scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
 
 2) Performance impact
 
-The program is memory bound, so we keep task2's implementation as baseline. Here we can see `Optimized Reduce – MSSP ` and `Scan Inclusive AddI32` are influenced. Although `Optimized Reduce – Int32 Add` also calls `scanIncWarp`, it is still memory bound.
+The program is memory bound, so we keep task2's implementation as baseline. Here we can see `Optimized Reduce – MSSP ` is influenced most. Although `Optimized Reduce – Int32 Add` and `Scan Inclusive AddI32` also call `scanIncWarp`, they are still memory bound.
+
+Testing parallel basic blocks
+N = 100003565
+block size = 256
+ELEMS_PER_THREAD = 24
 
 | Test Case                                | Warp-level reduce+GMem-SMem Coalesced (GB/s) | GMem-SMem Coalesced (GB/s) | Relative Gain (%) |
 |------------------------------------------|-----------------------------------------------|-----------------------------|-------------------|
-| Optimized Reduce – MSSP                  | 375.60                                        | 256.91                      | +46.2%            |
-| Scan Inclusive AddI32                    | 739.85                                        | 673.80                      | +9.8%             |
+| Optimized Reduce – MSSP                  | 542.76                                        | 373.85                      | +45.18%            |
 
 
-Also, we have a version with task2+task3 with original baseline.
+Also, we have a version with task2+task3 with original baseline. Here we can see `Optimized Reduce – MSSP ` and `Scan Inclusive AddI32` are influenced most. 
 
 | Test Case                                | Warp-level reduce+GMem-SMem Coalesced (GB/s) | baseline (GB/s) | Relative Gain (%) |
 |------------------------------------------|-----------------------------------------------|-----------------------------|-------------------|
-| Optimized Reduce – MSSP                  | 375.60                                        | 200.61                      | +87.2%            |
-| Scan Inclusive AddI32                    | 739.85                                        | 268.11                      | +175.95%             |
+| Optimized Reduce – MSSP                  | 542.76                                        | 268.47                      | +102.16%            |
+| Scan Inclusive AddI32                    | 977.23                                        | 329.68                      | +196.41%             |
 
 
 ## Task4 Find the bug in `scanIncBlock` 
+Error message: 
+`INVALID, EXITING!!!`
+Config:
+```Shell
+Testing parallel basic blocks
+N = 100000
+block size = 1024
+ELEMS_PER_THREAD = 6
+```
+
+Analysis:
 When block size is 1024, with a warp size of 32, a 1024-thread block has exactly 32 warps. Let's name the warp-ids 0...31.
 
 The race condition happends in the following code:
@@ -159,4 +184,77 @@ Consider the (idx=31, lane=31, warp_id=0) as T1 and the (idx=1023, lane=31, warp
 This case only happends when block size is 1024, because only this size would have overlap on warpid and idx.
 
 
-## Task5 
+## Task5 Flat Sparse-Matrix Vector Multiplication in CUDA 
+
+1) Validation:
+![Validation result](<截屏2025-09-11 22.41.14.png>)
+
+2) Implementations
+
+spmv_mul_main.cu:
+```c++
+uint32_t num_blocks     = (tot_size  + block_size - 1) / block_size;
+uint32_t num_blocks_shp = (mat_rows + block_size - 1) / block_size;
+```
+
+spmv_mul_kernels.cuh:
+
+1) replicate0 zeroes the flags buffer.
+```c++
+__global__ void
+replicate0(int tot_size, char* flags_d) {
+    int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
+    for (int i = gid; i < tot_size; i += stride) {
+        flags_d[i] = 0;
+    }
+}
+```
+
+2) `mkFlags` marks each beginning position of each scan result in each row.
+
+```c++
+__global__ void
+mkFlags(int mat_rows, int* mat_shp_sc_d, char* flags_d) {
+    int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
+    for (int r = gid; r < mat_rows; r += stride) {
+        int head_idx = (r == 0) ? 0 : mat_shp_sc_d[r - 1];
+        flags_d[head_idx] = 1;
+    }
+}
+```
+
+3)  `mult_pairs` computes `mat_vals[i] * vct[mat_inds[i]]`.
+```c++
+__global__ void
+mult_pairs(int* mat_inds, float* mat_vals, float* vct, int tot_size, float* tmp_pairs) {
+    int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
+    for (int i = gid; i < tot_size; i += stride) {
+        int col = mat_inds[i];
+        tmp_pairs[i] = mat_vals[i] * vct[col];
+    }
+}
+```
+4) `select_last_in_sgm` reads the last index per row: `last_idx = mat_shp_sc_d[r] - 1`.
+```c++
+__global__ void
+select_last_in_sgm(int mat_rows, int* mat_shp_sc_d, float* tmp_scan, float* res_vct_d) {
+    int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
+    for (int r = gid; r < mat_rows; r += stride) {
+        int last_idx = mat_shp_sc_d[r] - 1;
+        res_vct_d[r] = (last_idx >= 0) ? tmp_scan[last_idx] : 0.0f;
+    }
+}
+```
+
+3) Performance
+
+| Metric                  |                CPU |                GPU |
+| ----------------------- | -----------------: | -----------------: |
+| Runtime                 |      **19,573 µs** |         **469 µs** |
+| Rows per second         | **0.564 M rows/s** | **23.52 M rows/s** |
+
+GPU is 41.73 times faster then CPU.

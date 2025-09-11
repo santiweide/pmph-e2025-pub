@@ -4,7 +4,6 @@
 #include <math.h>
 #include "host_skel.cuh"
 
-
 void initArray(int32_t* inp_arr, const uint32_t N, const int R) {
     const uint32_t M = 2*R+1;
     for(uint32_t i=0; i<N; i++) {
