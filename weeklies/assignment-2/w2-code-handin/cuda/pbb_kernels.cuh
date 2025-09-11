@@ -181,8 +181,7 @@ template<class OP>
 __device__ inline typename OP::RedElTp
 scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
     const uint32_t lane = idx & (WARP-1);
-    using T = typename OP::RedElTp;
-    T v = OP::remVolatile(ptr[idx]); 
+    auto v = OP::remVolatile(ptr[idx]); 
     ptr[idx] = v;
     for (int offset = 1; offset < WARP; offset <<= 1) {
         if (lane >= offset) {
@@ -236,17 +235,21 @@ scanIncBlock(volatile typename OP::RedElTp* ptr, const uint32_t idx) {
     //   the first warp. This works because
     //   warp size = 32, and
     //   max block size = 32^2 = 1024
-    if (lane == (WARP-1)) { ptr[warpid] = OP::remVolatile(ptr[idx]); }
+    // if (lane == (WARP-1)) { ptr[warpid] = OP::remVolatile(ptr[idx]); }
+    if (lane == (WARP-1)) { ptr[warpid] = res; }
+
     __syncthreads();
 
     // 3. scan again the first warp.
     if (warpid == 0) scanIncWarp<OP>(ptr, idx);
+    
     __syncthreads();
 
     // 4. accumulate results from previous step.
     if (warpid > 0) {
         res = OP::apply(ptr[warpid-1], res);
     }
+
 
     return res;
 }

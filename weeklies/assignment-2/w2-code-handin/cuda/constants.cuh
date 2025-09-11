@@ -14,7 +14,7 @@
 #define RUNS_CPU            5
 
 #ifndef ELEMS_PER_THREAD
-#define ELEMS_PER_THREAD    24
+#define ELEMS_PER_THREAD    6
 #endif
 
 uint32_t MAX_HWDTH;

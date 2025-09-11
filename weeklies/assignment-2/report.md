@@ -115,8 +115,7 @@ template<class OP>
 __device__ inline typename OP::RedElTp
 scanIncWarp( volatile typename OP::RedElTp* ptr, const uint32_t idx ) {
     const uint32_t lane = idx & (WARP-1);
-    using T = typename OP::RedElTp;
-    T v = OP::remVolatile(ptr[idx]); 
+    auto v = OP::remVolatile(ptr[idx]); 
     ptr[idx] = v;
     for (int offset = 1; offset < WARP; offset <<= 1) {
         if (lane >= offset) {
@@ -146,7 +145,18 @@ Also, we have a version with task2+task3 with original baseline.
 | Scan Inclusive AddI32                    | 739.85                                        | 268.11                      | +175.95%             |
 
 
-## Task4 
+## Task4 Find the bug in `scanIncBlock` 
+When block size is 1024, with a warp size of 32, a 1024-thread block has exactly 32 warps. Let's name the warp-ids 0...31.
+
+The race condition happends in the following code:
+
+```c++
+if (lane == (WARP-1)) { ptr[warpid] = OP::remVolatile(ptr[idx]); }
+```
+
+Consider the (idx=31, lane=31, warp_id=0) as T1 and the (idx=1023, lane=31, warp_id=31) as T2. Let T1 reads and T2 writes, then T1 reads ptr[31] and T2 writes ptr[31] happends at the same time. 
+
+This case only happends when block size is 1024, because only this size would have overlap on warpid and idx.
 
 
 ## Task5 
