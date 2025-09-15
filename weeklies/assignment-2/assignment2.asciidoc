@@ -1,7 +1,8 @@
 = Second Weekly Assignment for the PMPH Course
 
 This is the text of the second weekly assignment for the DIKU course
-"Programming Massively Parallel Hardware", 2025-2026.
+"Programming Massively Parallel Hardware", 2025-2026, which warrants
+a total of 15 points.
 
 Hand in your solution in the form of a report in text or PDF
 format, along with the missing code.   We hand out incomplete code in
@@ -62,7 +63,7 @@ see where and how those functions are used in the implementation of
 3. The `hendrixfut03fl` server has two GPUs; you can run on the second one by
    adding `cudaSetDevice(1);` at the beginning of the `main` function(s).
 
-== Task 1: Flat Implementation of Prime-Numbers Computation in Futhark (3 pts)
+== Task 1: Flat Implementation of Prime-Numbers Computation in Futhark (5 pts)
 
 This task refers to flattening the nested-parallel version of prime-number
 computation, which computes all the prime numbers less than or equal to `n`
@@ -203,7 +204,7 @@ please do NOT use `__syncthreads();` and the like in there
 The optimizations of Task 2 and 3 do not apply for all tests, so some
 will not benefit from it.)
 
-== Task 4: Find the bug in `scanIncBlock`  (1 pts)
+== Task 4: Find the bug in `scanIncBlock`  (2 pts)
 
 There is a nasty race-condition bug in function `scanIncBlock` of file `pbb_kernels.cuh`
 which appears only for CUDA blocks of size 1024. For example running from terminal with
@@ -222,7 +223,7 @@ of threads by using the implementation of the warp-level scan that is the subjec
 `ELEMS_PER_THREAD` (in file `constants.cuh`) to `6` otherwise you will also get
 other errors!
 
-== Task 5: Flat Sparse-Matrix Vector Multiplication in CUDA (2 pts)
+== Task 5: Flat Sparse-Matrix Vector Multiplication in CUDA (4 pts)
 
 This task refers to writing a flat-parallel version of sparse-matrix vector multiplication in CUDA.
 Take a look at Section 3.2.4 ``Sparse-Matrix Vector Multiplication'' in lecture notes, page 40-41
