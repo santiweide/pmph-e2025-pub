@@ -208,8 +208,8 @@ will not benefit from it.)
 
 There is a nasty race-condition bug in function `scanIncBlock` of file `pbb_kernels.cuh`
 which appears only for CUDA blocks of size 1024. For example running from terminal with
-command `./test-pbb 100000 1024` should manifest it.
-(Or set 1024 as the second argument of `test-pbb` in `Makefile`.)
+command `./test_pbb 100000 1024` should manifest it.
+(Or set 1024 as the second argument of `test_pbb` in `Makefile`.)
 
 Can you find the bug? It will shed insight on the importance of block-level synchronization in CUDA.
 As well, this will help you to understand how to scan CUDA-block elements with a CUDA-block
@@ -219,9 +219,7 @@ of threads by using the implementation of the warp-level scan that is the subjec
 *Please explain in the report the nature of the bug, why does it appear only
     for block size 1024, and how did you fix it.*
 
-*When compiling/running with block size `1024` remember* to set the value of
-`ELEMS_PER_THREAD` (in file `constants.cuh`) to `6` otherwise you will also get
-other errors!
+*When compiling/running with block size `1024` remember* to set the value of `ELEMS_PER_THREAD` to `6` (in `Makefile`, and if not set there in file `constants.cuh`) otherwise you will also get other errors!
 
 == Task 5: Flat Sparse-Matrix Vector Multiplication in CUDA (4 pts)
 
