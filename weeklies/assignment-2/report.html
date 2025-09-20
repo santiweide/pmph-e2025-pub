@@ -1,0 +1,368 @@
+<!DOCTYPE html><html><head>
+      <title>report</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/fng685/.vscode-server/extensions/shd101wyy.markdown-preview-enhanced-0.8.19/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h2 id="pmph-assignment-2">PMPH Assignment 2 </h2>
+<p>by Wanjing Hu(fng685)</p>
+<p>Device name: NVIDIA A100-PCIE-40GB<br>
+Number of hardware threads: 221184<br>
+Max block size: 1024<br>
+Shared memory size: 49152<br>
+RUNS_GPU: 500<br>
+ELEMS_PER_THREAD: 24(except task 4).</p>
+<h3 id="task1-flat-implementation-of-prime-numbers-computation-in-futhark">Task1 Flat Implementation of Prime-Numbers Computation in Futhark </h3>
+<h4 id="11-validation-status">1.1 Validation status </h4>
+<p>The implementation passed on both dataset with <code>futhark test --backend=cuda primes-flat.fut</code>:</p>
+<p><img src="https://raw.githubusercontent.com/santiweide/pmph-e2025-pub/refs/heads/main/weeklies/assignment-2/image.png" alt="1.1 Validation Result"></p>
+<p>Large dataset (N = 1e7): After generating ref10000000.out with primes-seq.fut as instructed, futhark test will also validate the flat version against that reference (the file already contains the validation stanza).</p>
+<h4 id="12-code-explanation">1.2 Code Explanation </h4>
+<p>In each iteration with bound len, for every prime <code>p</code> in <code>sqrn_primes</code> I can form an inner list: <code>L_p = [2p, 3p, ..., floor(len/p)p]</code>. Then I concatenate all <code>L_p</code> to a single vector not_primes, and scatter zeros at those indices into an all-ones flag vector of length <code>len+1</code>. Finally, I filter the indices that remain true to obtain the new <code>sqrn_primes</code> for the next (squared) len.</p>
+<p>Here:</p>
+<p>I have <code>mult_lens</code> are exactly the lengths of the irregular inner lists <code>arr = [2..m]</code> (multiplier space) per prime p.</p>
+<p><code>seg_starts</code> and the <code>heads+scan</code> realise the segment descriptor that replaces the irregular structure by indices into a flat array.</p>
+<p><code>seg_ends</code> is the inclusive scan of lengths.</p>
+<pre data-role="codeBlock" data-info="haskell" class="language-haskell haskell"><code>      <span class="token comment">-- </span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">seg_ends</span>    <span class="token operator">=</span> <span class="token hvariable">scan</span> <span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token number">0</span> <span class="token hvariable">mult_lens</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">seg_starts</span>  <span class="token operator">=</span> <span class="token hvariable">map2</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token punctuation">)</span> <span class="token hvariable">seg_ends</span> <span class="token hvariable">mult_lens</span>
+
+      <span class="token comment">-- Build "heads" with the same [S] dimension for indices and values to keep shape certain</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">ones</span>        <span class="token operator">=</span> <span class="token builtin">map</span> <span class="token punctuation">(</span><span class="token builtin">const</span> 1i64<span class="token punctuation">)</span> <span class="token hvariable">seg_starts</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">heads</span>       <span class="token operator">=</span> <span class="token hvariable">scatter</span> <span class="token punctuation">(</span><span class="token builtin">replicate</span> <span class="token hvariable">flat_size</span> 0i64<span class="token punctuation">)</span> <span class="token hvariable">seg_starts</span> <span class="token hvariable">ones</span>
+
+    <span class="token comment">-- label each flat position with its segment id</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">seg_ids_inc</span> <span class="token operator">=</span> <span class="token hvariable">scan</span> <span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token number">0</span> <span class="token hvariable">heads</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">seg_ids</span>     <span class="token operator">=</span> <span class="token builtin">map</span> <span class="token punctuation">(</span><span class="token operator">\</span><span class="token hvariable">x</span> <span class="token operator">-&gt;</span> <span class="token hvariable">x</span> <span class="token operator">-</span> 1i64<span class="token punctuation">)</span> <span class="token hvariable">seg_ids_inc</span>
+</code></pre><p><code>j_vals</code> reconstruct the per-segment multiplier <code>(2..m)</code> for each flat element, and multiplying by <code>p_flat</code> yields the precise positions I would have produced in the nested <code>map/concat</code> comprehension.</p>
+<pre data-role="codeBlock" data-info="haskell" class="language-haskell haskell"><code>      <span class="token keyword keyword-let">let</span> <span class="token hvariable">p_flat</span>      <span class="token operator">=</span> <span class="token builtin">map</span> <span class="token punctuation">(</span><span class="token operator">\</span><span class="token hvariable">sid</span> <span class="token operator">-&gt;</span> <span class="token hvariable">sq_primes</span><span class="token punctuation">[</span><span class="token hvariable">sid</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token hvariable">seg_ids</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">start_flat</span>  <span class="token operator">=</span> <span class="token builtin">map</span> <span class="token punctuation">(</span><span class="token operator">\</span><span class="token hvariable">sid</span> <span class="token operator">-&gt;</span> <span class="token hvariable">seg_starts</span><span class="token punctuation">[</span><span class="token hvariable">sid</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token hvariable">seg_ids</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">idx_flat</span>    <span class="token operator">=</span> <span class="token hvariable">iota</span> <span class="token hvariable">flat_size</span>
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">j_vals</span>      <span class="token operator">=</span> <span class="token builtin">map</span> <span class="token punctuation">(</span><span class="token operator">+</span>2i64<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token hvariable">map2</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token punctuation">)</span> <span class="token hvariable">idx_flat</span> <span class="token hvariable">start_flat</span><span class="token punctuation">)</span>
+
+      <span class="token keyword keyword-let">let</span> <span class="token hvariable">not_primes</span>  <span class="token operator">=</span> <span class="token hvariable">map2</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token hvariable">p_flat</span> <span class="token hvariable">j_vals</span>
+</code></pre><h3 id="13-performance-on-large-dataset1e7">1.3 Performance on large dataset(1e7) </h3>
+<p>Here I use the work-depth model to analysis the performance expectation.<br>
+Work <code>W(n)</code> is the total number of primitive operations performed by the algorithm on an input of size <code>n</code>, summing across all parallel branches.</p>
+<h4 id="131-work-analysis">1.3.1 Work analysis </h4>
+<p>The <code>primes-seq</code>, <code>primes-native</code> and <code>primes-flat</code> all have a work of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">Θ</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mtext>&nbsp;</mtext><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">W(n)  =  \Theta \big(n \log\ log n\big).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord">Θ</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace">&nbsp;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mord">.</span></span></span></span> They directly construct the indices to be eliminated (the sequence of multiples for each base p), set these positions to zero at once; avoid performing division tests on each number individually.</p>
+<p>Calculation:</p>
+<p>Work per iteration:</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mrow><mi>p</mi><mo>∈</mo><mtext>primes</mtext><mo>≤</mo><mtext mathvariant="monospace">len</mtext></mrow></msub><mrow><mo fence="true">(</mo><mrow><mo fence="true">⌊</mo><mfrac><mtext mathvariant="monospace">len</mtext><mi>p</mi></mfrac><mo fence="true">⌋</mo></mrow><mo>−</mo><mn>1</mn><mo fence="true">)</mo></mrow><mo>=</mo><mi mathvariant="normal">Θ</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mtext mathvariant="monospace">len</mtext><mi>log</mi><mo>⁡</mo><mi>log</mi><mo>⁡</mo><mtext mathvariant="monospace">len</mtext><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sum_{p\in \text{primes} \le \texttt{len}}
+  \left(\left\lfloor \frac{\texttt{len}}{p}\right\rfloor - 1\right)
+   =  \Theta  \big(\texttt{len} \log\log \texttt{len}\big),</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1678em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mrel mtight">∈</span><span class="mord text mtight"><span class="mord mtight">primes</span></span><span class="mrel mtight">≤</span><span class="mord text mtight"><span class="mord texttt mtight">len</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">⌊</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8218em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord texttt mtight">len</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">⌋</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord">Θ</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord text"><span class="mord texttt">len</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord texttt">len</span></span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mpunct">,</span></span></span></span></p>
+<p>The number of iterations: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⌈</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>n</mi><mo stretchy="false">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil \log_{2}\log_{2} n \rceil</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌈</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">⌉</span></span></span></span></p>
+<p>Total work: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">Θ</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">W(n) = \Theta  \big(n \log\log n\big).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord">Θ</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mord">.</span></span></span></span></p>
+<p>The ad-hoc version does not meet my expectation. For each candidate i in the interval, this version tests divide it by all primes p in the "known prime table acc." Only retain i if none of these primes divide it evenly. So for the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mi>h</mi></mrow><annotation encoding="application/x-tex">k_th</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">h</span></span></span></span> iteration, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mi>k</mi></msub><mo>=</mo><mi mathvariant="normal">∣</mi><mi>i</mi><msub><mi>s</mi><mi>k</mi></msub><mi mathvariant="normal">∣</mi><mo>∗</mo><mi mathvariant="normal">∣</mi><mi>a</mi><mi>c</mi><msub><mi>c</mi><mi>k</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">W_k=|is_k|*|acc_k|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span>. And the total workload is larger than the direct filtering strategy.</p>
+<h4 id="132-depth-analysis">1.3.2 Depth analysis </h4>
+<p>Since the Depth treats map/scan/filter/scatter as constant-span primitives, I have depth of <code>prime-flat</code> and <code>prime-adhoc</code> as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mi>log</mi><mo>⁡</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">\Theta  \big(\log\log n\big)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord">Θ</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mord"><span class="delimsizing size1">)</span></span></span></span></span>.</p>
+<p>The depth of <code>prime-naive</code> is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><msqrt><mi>n</mi></msqrt><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">\Theta  \big(\sqrt n\big)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord">Θ</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8003em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="padding-left:0.833em;">n</span></span><span style="top:-2.7603em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2397em;"><span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">)</span></span></span></span></span>, because its outer loop goes from 2 to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>n</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.2397em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8003em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="padding-left:0.833em;">n</span></span><span style="top:-2.7603em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2397em;"><span></span></span></span></span></span></span></span></span>, and inside the loop is <code>map/scatter</code> which contributes as constant.</p>
+<p>The depth of <code>prime-seq</code> is fully sequencial so depth equals to the work: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">Θ</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">D(n)  =  \Theta  \big(n \log\log n\big).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord">Θ</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mord">.</span></span></span></span></p>
+<h4 id="133-experiment-result">1.3.3 Experiment Result </h4>
+<p>Testing parallel basic blocks<br>
+N = 100003565<br>
+block size = 256<br>
+ELEMS_PER_THREAD = 24</p>
+<table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Backend</th>
+<th>Avg time (ms)</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>primes-seq.fut</td>
+<td>C</td>
+<td>183.570</td>
+<td>SloI st (no parallelism).</td>
+</tr>
+<tr>
+<td>primes-adhoc.fut</td>
+<td>CUDA</td>
+<td>183.319</td>
+<td>Optimal depth but more total work; can win on GPU due to regularity.</td>
+</tr>
+<tr>
+<td>primes-naive.fut</td>
+<td>CUDA</td>
+<td>58.012</td>
+<td>Faster than seq</td>
+</tr>
+<tr>
+<td>primes-flat.fut</td>
+<td>CUDA</td>
+<td>1.554.</td>
+<td>Fastest</td>
+</tr>
+</tbody>
+</table>
+<h2 id="task2-copying-fromto-global-tofrom-shared-memory-in-coalesced-fashion">Task2 Copying from/to Global to/from Shared Memory in Coalesced Fashion </h2>
+<ol>
+<li>
+<p>one-line replacement:<br>
+I change from <code>uint32_t loc_ind = threadIdx.x * CHUNK + i;</code> to <code>uint32_t loc_ind = i * blockDim.x + threadIdx.x;</code>, so that i is accessed with Row-major and can coalesced across threads</p>
+</li>
+<li>
+<p>In the new code, for a continuous section of threadIdx.x, the accessed <code>loc_ind</code> is also continuous, and so memory controller can coalesce the memory access into full-width transactions. The previous layout made neighboring threads stride by CHUNK, which is not able to be coalesced.</p>
+</li>
+<li>
+<p>According to the experiment <code>Coalesced ON &amp; Warp OFF </code> vs <code>Coalesced OFF &amp; Warp OFF</code>, the following tests have an improvement of bandwidth:</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Test Case</th>
+<th>GMem-SMem Coalesced (GB/s)</th>
+<th>Baseline (GB/s)</th>
+<th>Relative Gain (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Optimized Reduce – MSSP</td>
+<td>373.85</td>
+<td>268.47</td>
+<td>+39.25%</td>
+</tr>
+<tr>
+<td>Scan Inclusive AddI32</td>
+<td>925.96</td>
+<td>329.68</td>
+<td>+180.86%</td>
+</tr>
+<tr>
+<td>Segmented Scan Inclusive AddI32</td>
+<td>1038.61</td>
+<td>461.15</td>
+<td>+125.22%</td>
+</tr>
+</tbody>
+</table>
+<p>The MSSP is not communitative, and AddInt32 is communicative. So when do the optimized map reduce they are of different implementations.</p>
+<h2 id="task3-implement-inclusive-scan-at-warp-level">Task3 Implement Inclusive Scan at WARP Level </h2>
+<ol>
+<li>Implementation: we do a warp level reduce add, because all the threads in a wrap are naturally synchronized.</li>
+</ol>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-class">class</span> <span class="token class-name">OP</span><span class="token operator">&gt;</span>
+__device__ <span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-typename">typename</span> <span class="token class-name">OP</span><span class="token double-colon punctuation">::</span>RedElTp
+<span class="token function">scanIncWarp</span><span class="token punctuation">(</span> <span class="token keyword keyword-volatile">volatile</span> <span class="token keyword keyword-typename">typename</span> <span class="token class-name">OP</span><span class="token double-colon punctuation">::</span>RedElTp<span class="token operator">*</span> ptr<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-uint32_t">uint32_t</span> idx <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-uint32_t">uint32_t</span> lane <span class="token operator">=</span> idx <span class="token operator">&amp;</span> <span class="token punctuation">(</span>WARP<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> v <span class="token operator">=</span> <span class="token class-name">OP</span><span class="token double-colon punctuation">::</span><span class="token function">remVolatile</span><span class="token punctuation">(</span>ptr<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    ptr<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> v<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> offset <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> offset <span class="token operator">&lt;</span> WARP<span class="token punctuation">;</span> offset <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>lane <span class="token operator">&gt;=</span> offset<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            v <span class="token operator">=</span> <span class="token class-name">OP</span><span class="token double-colon punctuation">::</span><span class="token function">apply</span><span class="token punctuation">(</span>ptr<span class="token punctuation">[</span>idx <span class="token operator">-</span> offset<span class="token punctuation">]</span><span class="token punctuation">,</span> ptr<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ptr<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> v<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> v<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="2">
+<li>Performance impact</li>
+</ol>
+<p>The program is memory bound, so we keep task2's implementation as baseline. Here we can see <code>Optimized Reduce – MSSP </code> is influenced most. Although <code>Optimized Reduce – Int32 Add</code> and <code>Scan Inclusive AddI32</code> also call <code>scanIncWarp</code>, they are still memory bound.</p>
+<p>Testing parallel basic blocks<br>
+N = 100003565<br>
+block size = 256<br>
+ELEMS_PER_THREAD = 24</p>
+<table>
+<thead>
+<tr>
+<th>Test Case</th>
+<th>Warp-level reduce+GMem-SMem Coalesced (GB/s)</th>
+<th>GMem-SMem Coalesced (GB/s)</th>
+<th>Relative Gain (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Optimized Reduce – MSSP</td>
+<td>542.76</td>
+<td>373.85</td>
+<td>+45.18%</td>
+</tr>
+</tbody>
+</table>
+<p>Also, we have a version with task2+task3 with original baseline. Here we can see <code>Optimized Reduce – MSSP </code> and <code>Scan Inclusive AddI32</code> are influenced most.</p>
+<table>
+<thead>
+<tr>
+<th>Test Case</th>
+<th>Warp-level reduce+GMem-SMem Coalesced (GB/s)</th>
+<th>baseline (GB/s)</th>
+<th>Relative Gain (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Optimized Reduce – MSSP</td>
+<td>542.76</td>
+<td>268.47</td>
+<td>+102.16%</td>
+</tr>
+<tr>
+<td>Scan Inclusive AddI32</td>
+<td>977.23</td>
+<td>329.68</td>
+<td>+196.41%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="task4-find-the-bug-in-scanincblock">Task4 Find the bug in <code>scanIncBlock</code> </h2>
+<p>Error message:<br>
+<code>INVALID, EXITING!!!</code><br>
+Config:</p>
+<pre data-role="codeBlock" data-info="Shell" class="language-shell Shell"><code>Testing parallel basic blocks
+N <span class="token operator">=</span> <span class="token number">100000</span>
+block size <span class="token operator">=</span> <span class="token number">1024</span>
+ELEMS_PER_THREAD <span class="token operator">=</span> <span class="token number">6</span>
+</code></pre><p>Analysis:<br>
+When block size is 1024, with a warp size of 32, a 1024-thread block has exactly 32 warps. Let's name the warp-ids 0...31.</p>
+<p>The race condition happends in the following code:</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>lane <span class="token operator">==</span> <span class="token punctuation">(</span>WARP<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ptr<span class="token punctuation">[</span>warpid<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token class-name">OP</span><span class="token double-colon punctuation">::</span><span class="token function">remVolatile</span><span class="token punctuation">(</span>ptr<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre><p>Consider the (idx=31, lane=31, warp_id=0) as T1 and the (idx=1023, lane=31, warp_id=31) as T2. Let T1 reads and T2 writes, then T1 reads ptr[31] and T2 writes ptr[31] happends at the same time.</p>
+<p>This case only happends when block size is 1024, because only this size would have overlap on warpid and idx.</p>
+<h2 id="task5-flat-sparse-matrix-vector-multiplication-in-cuda">Task5 Flat Sparse-Matrix Vector Multiplication in CUDA </h2>
+<ol>
+<li>
+<p>Validation:<br>
+<img src="https://raw.githubusercontent.com/santiweide/pmph-e2025-pub/refs/heads/main/weeklies/assignment-2/%E6%88%AA%E5%B1%8F2025-09-11%2022.41.14.png" alt="Validation result"></p>
+</li>
+<li>
+<p>Implementations</p>
+</li>
+</ol>
+<p>spmv_mul_main.cu:</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-uint32_t">uint32_t</span> num_blocks     <span class="token operator">=</span> <span class="token punctuation">(</span>tot_size  <span class="token operator">+</span> block_size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> block_size<span class="token punctuation">;</span>
+<span class="token keyword keyword-uint32_t">uint32_t</span> num_blocks_shp <span class="token operator">=</span> <span class="token punctuation">(</span>mat_rows <span class="token operator">+</span> block_size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> block_size<span class="token punctuation">;</span>
+</code></pre><p>spmv_mul_kernels.cuh:</p>
+<ol>
+<li>replicate0 zeroes the flags buffer.</li>
+</ol>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code>__global__ <span class="token keyword keyword-void">void</span>
+<span class="token function">replicate0</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> tot_size<span class="token punctuation">,</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> flags_d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> gid <span class="token operator">=</span> blockIdx<span class="token punctuation">.</span>x <span class="token operator">*</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">+</span> threadIdx<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> stride <span class="token operator">=</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">*</span> gridDim<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> gid<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tot_size<span class="token punctuation">;</span> i <span class="token operator">+=</span> stride<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        flags_d<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="2">
+<li><code>mkFlags</code> marks each beginning position of each scan result in each row.</li>
+</ol>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code>__global__ <span class="token keyword keyword-void">void</span>
+<span class="token function">mkFlags</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> mat_rows<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span><span class="token operator">*</span> mat_shp_sc_d<span class="token punctuation">,</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> flags_d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> gid <span class="token operator">=</span> blockIdx<span class="token punctuation">.</span>x <span class="token operator">*</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">+</span> threadIdx<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> stride <span class="token operator">=</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">*</span> gridDim<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> r <span class="token operator">=</span> gid<span class="token punctuation">;</span> r <span class="token operator">&lt;</span> mat_rows<span class="token punctuation">;</span> r <span class="token operator">+=</span> stride<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-int">int</span> head_idx <span class="token operator">=</span> <span class="token punctuation">(</span>r <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token operator">:</span> mat_shp_sc_d<span class="token punctuation">[</span>r <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        flags_d<span class="token punctuation">[</span>head_idx<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="3">
+<li><code>mult_pairs</code> computes <code>mat_vals[i] * vct[mat_inds[i]]</code>.</li>
+</ol>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code>__global__ <span class="token keyword keyword-void">void</span>
+<span class="token function">mult_pairs</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token operator">*</span> mat_inds<span class="token punctuation">,</span> <span class="token keyword keyword-float">float</span><span class="token operator">*</span> mat_vals<span class="token punctuation">,</span> <span class="token keyword keyword-float">float</span><span class="token operator">*</span> vct<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> tot_size<span class="token punctuation">,</span> <span class="token keyword keyword-float">float</span><span class="token operator">*</span> tmp_pairs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> gid <span class="token operator">=</span> blockIdx<span class="token punctuation">.</span>x <span class="token operator">*</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">+</span> threadIdx<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> stride <span class="token operator">=</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">*</span> gridDim<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> gid<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tot_size<span class="token punctuation">;</span> i <span class="token operator">+=</span> stride<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-int">int</span> col <span class="token operator">=</span> mat_inds<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        tmp_pairs<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> mat_vals<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> vct<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="4">
+<li><code>select_last_in_sgm</code> reads the last index per row: <code>last_idx = mat_shp_sc_d[r] - 1</code>.</li>
+</ol>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code>__global__ <span class="token keyword keyword-void">void</span>
+<span class="token function">select_last_in_sgm</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> mat_rows<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span><span class="token operator">*</span> mat_shp_sc_d<span class="token punctuation">,</span> <span class="token keyword keyword-float">float</span><span class="token operator">*</span> tmp_scan<span class="token punctuation">,</span> <span class="token keyword keyword-float">float</span><span class="token operator">*</span> res_vct_d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> gid <span class="token operator">=</span> blockIdx<span class="token punctuation">.</span>x <span class="token operator">*</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">+</span> threadIdx<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> stride <span class="token operator">=</span> blockDim<span class="token punctuation">.</span>x <span class="token operator">*</span> gridDim<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> r <span class="token operator">=</span> gid<span class="token punctuation">;</span> r <span class="token operator">&lt;</span> mat_rows<span class="token punctuation">;</span> r <span class="token operator">+=</span> stride<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-int">int</span> last_idx <span class="token operator">=</span> mat_shp_sc_d<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        res_vct_d<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>last_idx <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> tmp_scan<span class="token punctuation">[</span>last_idx<span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="3">
+<li>Performance</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align:right">CPU</th>
+<th style="text-align:right">GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Runtime</td>
+<td style="text-align:right"><strong>19,573 µs</strong></td>
+<td style="text-align:right"><strong>469 µs</strong></td>
+</tr>
+<tr>
+<td>Rows per second</td>
+<td style="text-align:right"><strong>0.564 M rows/s</strong></td>
+<td style="text-align:right"><strong>23.52 M rows/s</strong></td>
+</tr>
+</tbody>
+</table>
+<p>GPU is 41.73 times faster then CPU.</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

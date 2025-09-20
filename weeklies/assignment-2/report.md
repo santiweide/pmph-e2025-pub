@@ -15,7 +15,7 @@ ELEMS_PER_THREAD: 24(except task 4).
 
 The implementation passed on both dataset with `futhark test --backend=cuda primes-flat.fut`:
 
-![alt text](image.png)
+![1.1 Validation Result](https://raw.githubusercontent.com/santiweide/pmph-e2025-pub/refs/heads/main/weeklies/assignment-2/image.png)
 
 Large dataset (N = 1e7): After generating ref10000000.out with primes-seq.fut as instructed, futhark test will also validate the flat version against that reference (the file already contains the validation stanza).
 
@@ -187,7 +187,7 @@ This case only happends when block size is 1024, because only this size would ha
 ## Task5 Flat Sparse-Matrix Vector Multiplication in CUDA 
 
 1) Validation:
-![Validation result](<截屏2025-09-11 22.41.14.png>)
+![Validation result](https://raw.githubusercontent.com/santiweide/pmph-e2025-pub/refs/heads/main/weeklies/assignment-2/%E6%88%AA%E5%B1%8F2025-09-11%2022.41.14.png)
 
 2) Implementations
 
