@@ -214,9 +214,11 @@ Several potential choices for group project may be found in folder `group-projec
 * [Single Pass Scan in Cuda (basic block of parallel programming)](group-projects/single-pass-scan)
 * [Futhark or Cuda implementation for the Rank-K Search Problem](group-projects/rank-search-k)
 * [Fast Sorting Algorithm(s) for GPUs](group-projects/sorting-on-gpu)
-* [Bfast: a landscape change detection algorithm (Remote Sensing)](group-projects/bfast)
-* [Local Volatility Calibration  (Finance)](group-projects/loc-vol-calib)
-* [HP Implementation for Fusing Tensor Contractions (Deep Learning)](group-projects/tensor-contraction): read the paper, implement the technique (some initial code is provided), and try to replicate the results of the paper. Or you can also try to implement a matrix multiplication for 16-bit floats that uses the tensor-core support.
+* [Fusing stencil computations (Halide)](group-projects/Halide)
+
+Other projects, for which we do not provide a lot of guidance, may possibly be:
+* [HP Implementation for Fusing Tensor Contractions (Deep Learning)](group-projects/tensor-contraction): read the paper, implement the technique (some initial code is provided), and try to replicate the results of the paper. 
+* Use the tensor-core support of NVIDIA GPUs to unlock the performance of matrix-multiplication-heavy algorithms, such as Flash Attention. Please talk with Cosmin if you chose this one.
 
 [Here you can find the CUB library and a simple program that utilizes CUB to sort](group-projects/cub-code-radixsort)
 
